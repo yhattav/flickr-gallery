@@ -11,7 +11,7 @@ To get this app running locally all you need to do is:
 1. Clone the forked repo into your computer `git clone git@github.com:[YOUR_USERNAME]/flickr-gallery.git`
 2. In the created folder install the node modules `npm install`
 3. Run the app `npm start`
-4. Your local app should be available at `http://localhost:3000`
+4. Your local app should be available at `http://localhost:8000`
 
 ## Your Tasks
 This project includes several tasks for different skill levels. You may try completing them all but if you are new to Web Development, complete the tasks that are a bit above your level.
