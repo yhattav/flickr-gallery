@@ -17,7 +17,7 @@
     "start": "node server.js --env=dev",
     "test": "karma start",
     "test:watch": "karma start --autoWatch=true --singleRun=false",
-    "deploy": "haste build && gh-pages-deploy",
+    "deploy": "npm run dist && gh-pages-deploy",
     "clean-source": "rimraf README.md src test server.js webpack.config.js .yo-rc.json .travis.yml .eslintrc .editorconfig .babelrc karme.conf.js package.json"
   },
   "repository": "",
