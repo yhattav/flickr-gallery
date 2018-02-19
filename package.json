@@ -81,5 +81,12 @@
     "react": "^15.0.0",
     "react-dom": "^15.0.0",
     "react-fontawesome": "^1.6.1"
+  },
+  "gh-pages-deploy": {
+    "staticpath": "dist/statics",
+    "post": [
+      "clean-source"
+    ],
+    "noprompt": false
   }
 }
