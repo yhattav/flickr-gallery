@@ -83,7 +83,7 @@
     "react-fontawesome": "^1.6.1"
   },
   "gh-pages-deploy": {
-    "staticpath": "dist/statics",
+    "staticpath": "dist",
     "post": [
       "clean-source"
     ],

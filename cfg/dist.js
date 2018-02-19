@@ -19,7 +19,7 @@ let config = Object.assign({}, baseConfig, {
       'process.env.NODE_ENV': '"production"'
     }),
     new BowerWebpackPlugin({
-      searchResolveModulesDirectories: false
+      searchResolveModulesDirectories: true
     }),
     new webpack.optimize.UglifyJsPlugin(),
     new webpack.optimize.OccurenceOrderPlugin(),
