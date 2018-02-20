@@ -5,6 +5,9 @@ This app is simple, you write a tag at the top and you get images from flickr wi
 
 [![Build Status](https://travis-ci.org/guysopher/flickr-gallery.svg?branch=master)](https://travis-ci.org/guysopher/flickr-gallery)
 
+## Before Starting the Test
+Please make sure you've read the job description - [Student Software Engineer](https://www.wix.com/jobs/locations/tel-aviv/positions/2529) and that you are indeed interested in this position and all its terms (we don't want you work on a test for the wrong job).
+
 ## Getting Started
 To get this app running locally all you need to do is:
 1. Fork this repo into your personal github account.
