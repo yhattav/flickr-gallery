@@ -16,7 +16,7 @@ describe('Image', () => {
     return shallow(
       <Image
         dto={sampleImage}
-        imageIndex='0'
+        id='0'
         galleryWidth={galleryWidth}
         deleteClick={(() => {})}
         largeClick={(() => {})}

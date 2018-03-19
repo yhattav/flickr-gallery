@@ -22,13 +22,13 @@ describe('Slideshow', () => {
 
    const mountSlideshow = () => {
      return shallow(
-       <Slideshow dto={sampleImage} large={true} galleryWidth={galleryWidth} galleryHeight={galleryHeight} imageIndexInImages={3}/>,
+       <Slideshow dto={sampleImage} large={true} galleryWidth={galleryWidth} galleryHeight={galleryHeight} index={3}/>,
        {lifecycleExperimental: true, attachTo: document.createElement('div')}
      );
    };
    const mountFirstSlideshow = () => {
      return shallow(
-       <Slideshow dto={sampleImage} large={true} galleryWidth={galleryWidth} galleryHeight={galleryHeight} imageIndexInImages={0}/>,
+       <Slideshow dto={sampleImage} large={true} galleryWidth={galleryWidth} galleryHeight={galleryHeight} index={0}/>,
        {lifecycleExperimental: true, attachTo: document.createElement('div')}
      );
    };
@@ -37,7 +37,7 @@ describe('Slideshow', () => {
   //  });
    beforeEach(() => {
     wrapperSlide = mount(
-      <Slideshow dto={sampleImage} large={true} galleryWidth={galleryWidth} galleryHeight={galleryHeight} imageIndexInImages={3}/>,
+      <Slideshow dto={sampleImage} large={true} galleryWidth={galleryWidth} galleryHeight={galleryHeight} index={3}/>,
       {attachTo: document.createElement('div')}
     );
   });
