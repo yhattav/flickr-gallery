@@ -79,6 +79,8 @@
     "node-sass": "^4.7.2",
     "normalize.css": "^4.0.0",
     "react": "^15.0.0",
+    "react-dnd": "^2.5.4",
+    "react-dnd-html5-backend": "^2.5.4",
     "react-dom": "^15.0.0",
     "react-fontawesome": "^1.6.1"
   },

@@ -178,9 +178,9 @@ handleResize() {
         {this.state.images.map((dto,index) => {
         if(dto.large)
          return <Slideshow
-          imageIndexInImages={index}
+          index={index}
           galleryLength={this.state.images.length}
-          imageIndex={dto.id}
+          id={dto.id}
           large={dto.large}
           arrowClick={this.arrow_Click}
           largeClick={this.large_Click}
@@ -192,7 +192,7 @@ handleResize() {
           galleryHeight={this.state.galleryHeight}/>;
           })}
         {this.state.images.map((dto,index) => {
-          return <Image imageIndexInImages={index} imageIndex={dto.id} large={dto.large} largeClick={this.large_Click} deleteClick={this.delete_Click} key={'image-' + dto.id} dto={dto} size={this.state.imageSize} galleryWidth={this.state.galleryWidth}/>;
+          return <Image index={index} id={dto.id} large={dto.large} largeClick={this.large_Click} deleteClick={this.delete_Click} key={'image-' + dto.id} dto={dto} size={this.state.imageSize} galleryWidth={this.state.galleryWidth}/>;
           
         })}
          <Backtop key='Backtop'/>

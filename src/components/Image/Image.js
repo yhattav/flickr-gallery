@@ -8,8 +8,8 @@ class Image extends React.Component {
     dto: PropTypes.object,
     galleryWidth: PropTypes.number,
     size: PropTypes.number,
-    imageIndexInImages: PropTypes.number,
-    imageIndex: PropTypes.string
+    index: PropTypes.number,
+    id: PropTypes.string
   };
 
   constructor(props) {
@@ -51,8 +51,8 @@ class Image extends React.Component {
           transform: 'rotate(-'+this.state.rotate + 'deg)'
         }}>
           <FontAwesome className="image-icon rotateButton" id="rotateButton" name="sync-alt" title="rotate" onClick={() => this.rotate_Click()}/>
-          <FontAwesome className="image-icon deleteButton" id="deleteButton" name="trash-alt" title="delete" onClick={() => this.props.deleteClick(this.props.imageIndex)}/>
-          <FontAwesome className="image-icon expandButton" id="expandButton" name="expand" title="expand" onClick={() => this.props.largeClick(this.props.imageIndex)}/>
+          <FontAwesome className="image-icon deleteButton" id="deleteButton" name="trash-alt" title="delete" onClick={() => this.props.deleteClick(this.props.id)}/>
+          <FontAwesome className="image-icon expandButton" id="expandButton" name="expand" title="expand" onClick={() => this.props.largeClick(this.props.id)}/>
         </div>
       </div>
     );

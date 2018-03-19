@@ -11,8 +11,8 @@ class Slideshow extends React.Component {
     galleryHeight: PropTypes.number,
     size: PropTypes.number,
     galleryLength: PropTypes.number,
-    imageIndexInImages: PropTypes.number,
-    imageIndex: PropTypes.string,
+    index: PropTypes.number,
+    id: PropTypes.string,
     large: PropTypes.bool,
     size: PropTypes.number
   };
@@ -115,14 +115,14 @@ getSizes(dto) {
           </div>
           <div className="icons-background">
                 <div className="slide-icons">
-                  <FontAwesome className="image-icon" name="times" title="Close" onClick={() => this.props.largeClick(this.props.imageIndex)}/>
+                  <FontAwesome className="image-icon" name="times" title="Close" onClick={() => this.props.largeClick(this.props.id)}/>
                 </div>
                 <div className="left-icons">
-                  {this.props.imageIndexInImages > 0 &&
-                  <FontAwesome className="image-icon" name="chevron-left" title = {'Previous image: ' + (this.props.imageIndexInImages-1) + '/' + this.props.galleryLength } onClick={() => this.props.arrowClick(this.props.imageIndex,-1)}/>}
+                  {this.props.index > 0 &&
+                  <FontAwesome className="image-icon" name="chevron-left" title = {'Previous image: ' + (this.props.index-1) + '/' + this.props.galleryLength } onClick={() => this.props.arrowClick(this.props.id,-1)}/>}
                 </div>
                 <div className="right-icons">
-                  <FontAwesome className="image-icon" name="chevron-right" title={'Next Image: ' + (this.props.imageIndexInImages+1) + '/' + this.props.galleryLength } onClick={() => this.props.arrowClick(this.props.imageIndex,1)}/>
+                  <FontAwesome className="image-icon" name="chevron-right" title={'Next Image: ' + (this.props.index+1) + '/' + this.props.galleryLength } onClick={() => this.props.arrowClick(this.props.id,1)}/>
                 </div>
           </div>
         </div>

@@ -1,6 +1,8 @@
 import React from 'react';
 import './App.scss';
 import Gallery from '../Gallery';
+import HTML5Backend from 'react-dnd-html5-backend';
+import { DragDropContext } from 'react-dnd';
 
 class App extends React.Component {
   static propTypes = {
@@ -37,4 +39,4 @@ class App extends React.Component {
   }
 }
 
-export default App;
+export default DragDropContext(HTML5Backend)(App);
