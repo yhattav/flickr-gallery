@@ -6,34 +6,32 @@ import './Image.scss';
 class Image extends React.Component {
   static propTypes = {
     dto: PropTypes.object,
-    galleryWidth: PropTypes.number
+    galleryWidth: PropTypes.number,
+    size: PropTypes.number,
+    imageIndexInImages: PropTypes.number,
+    imageIndex: PropTypes.string
   };
 
   constructor(props) {
     super(props);
-    this.calcImageSize = this.calcImageSize.bind(this);
     this.state = {
-      size: 200
+      rotate: 0,
+      isLarge: false
     };
   }
 
-  calcImageSize() {
-    const {galleryWidth} = this.props;
-    const targetSize = 200;
-    const imagesPerRow = Math.round(galleryWidth / targetSize);
-    const size = (galleryWidth / imagesPerRow);
-    this.setState({
-      size
-    });
-  }
-
-  componentDidMount() {
-    this.calcImageSize();
-  }
 
   urlFromDto(dto) {
     return `https://farm${dto.farm}.staticflickr.com/${dto.server}/${dto.id}_${dto.secret}.jpg`;
   }
+
+  rotate_Click ()  {
+    var rotateEdit = this.state.rotate;
+    rotateEdit = rotateEdit + 90;
+        this.setState({
+      rotate: rotateEdit
+    });
+   }
 
   render() {
     return (
@@ -41,18 +39,25 @@ class Image extends React.Component {
         className="image-root"
         style={{
           backgroundImage: `url(${this.urlFromDto(this.props.dto)})`,
-          width: this.state.size + 'px',
-          height: this.state.size + 'px'
+          width: this.props.size + 'px',
+          height: this.props.size + 'px',
+          transform: 'rotate('+this.state.rotate + 'deg)'
+          
+          
         }}
         >
-        <div>
-          <FontAwesome className="image-icon" name="sync-alt" title="rotate"/>
-          <FontAwesome className="image-icon" name="trash-alt" title="delete"/>
-          <FontAwesome className="image-icon" name="expand" title="expand"/>
+        <div
+        style={{
+          transform: 'rotate(-'+this.state.rotate + 'deg)'
+        }}>
+          <FontAwesome className="image-icon rotateButton" id="rotateButton" name="sync-alt" title="rotate" onClick={() => this.rotate_Click()}/>
+          <FontAwesome className="image-icon deleteButton" id="deleteButton" name="trash-alt" title="delete" onClick={() => this.props.deleteClick(this.props.imageIndex)}/>
+          <FontAwesome className="image-icon expandButton" id="expandButton" name="expand" title="expand" onClick={() => this.props.largeClick(this.props.imageIndex)}/>
         </div>
       </div>
     );
   }
+  
 }
 
 export default Image;
