@@ -91,11 +91,15 @@ function collectDrag(connect, monitor) {
 
 class Image extends React.Component {
   static propTypes = {
+    //connectDragSource: PropTypes.func.isRequired,
+		//connectDropTarget: PropTypes.func.isRequired,
+		index: PropTypes.number.isRequired,
+		//isDragging: PropTypes.bool.isRequired,
+		id: PropTypes.any.isRequired,
+		moveImage: PropTypes.func.isRequired,
     dto: PropTypes.object,
     galleryWidth: PropTypes.number,
-    size: PropTypes.number,
-    index: PropTypes.number,
-    id: PropTypes.string
+    size: PropTypes.number
   };
 
   constructor(props) {
@@ -120,8 +124,37 @@ class Image extends React.Component {
    }
 
   render() {
-    return (
-      <div
+    const {
+			text,
+			isDragging,
+			connectDragSource,
+			connectDropTarget,
+		} = this.props
+    // return (
+      
+    //   <div
+    //     className="image-root"
+    //     style={{
+    //       backgroundImage: `url(${this.urlFromDto(this.props.dto)})`,
+    //       width: this.props.size + 'px',
+    //       height: this.props.size + 'px',
+    //       transform: 'rotate('+this.state.rotate + 'deg)'
+          
+          
+    //     }}
+    //     >
+    //     <div
+    //     style={{
+    //       transform: 'rotate(-'+this.state.rotate + 'deg)'
+    //     }}>
+    //       <FontAwesome className="image-icon rotateButton" id="rotateButton" name="sync-alt" title="rotate" onClick={() => this.rotate_Click()}/>
+    //       <FontAwesome className="image-icon deleteButton" id="deleteButton" name="trash-alt" title="delete" onClick={() => this.props.deleteClick(this.props.id)}/>
+    //       <FontAwesome className="image-icon expandButton" id="expandButton" name="expand" title="expand" onClick={() => this.props.largeClick(this.props.id)}/>
+    //     </div>
+    //   </div>
+    // );
+    return connectDragSource(
+			connectDropTarget(<div
         className="image-root"
         style={{
           backgroundImage: `url(${this.urlFromDto(this.props.dto)})`,
@@ -140,8 +173,8 @@ class Image extends React.Component {
           <FontAwesome className="image-icon deleteButton" id="deleteButton" name="trash-alt" title="delete" onClick={() => this.props.deleteClick(this.props.id)}/>
           <FontAwesome className="image-icon expandButton" id="expandButton" name="expand" title="expand" onClick={() => this.props.largeClick(this.props.id)}/>
         </div>
-      </div>
-    );
+      </div>),
+		)
   }
   
 }
