@@ -28,6 +28,18 @@ class Gallery extends React.Component {
     this.arrow_Click = this.arrow_Click.bind(this);
   }
 
+  moveImage(dragIndex, hoverIndex) {
+		const { images } = this.state
+    const dragImage = images[dragIndex]
+    images.splice(dragIndex,1);
+    images.splice(hoverIndex,0,dragImage);
+		this.setState({
+				images
+			});
+		
+	}
+
+
   calcImageSize() {
     const galleryWidth = this.getGalleryWidth();
     const targetSize = 200;
@@ -192,7 +204,7 @@ handleResize() {
           galleryHeight={this.state.galleryHeight}/>;
           })}
         {this.state.images.map((dto,index) => {
-          return <Image index={index} id={dto.id} large={dto.large} largeClick={this.large_Click} deleteClick={this.delete_Click} key={'image-' + dto.id} dto={dto} size={this.state.imageSize} galleryWidth={this.state.galleryWidth}/>;
+          return <Image moveImage={this.moveImage} index={index} id={dto.id} large={dto.large} largeClick={this.large_Click} deleteClick={this.delete_Click} key={'image-' + dto.id} dto={dto} size={this.state.imageSize} galleryWidth={this.state.galleryWidth}/>;
           
         })}
          <Backtop key='Backtop'/>

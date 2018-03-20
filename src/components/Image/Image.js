@@ -5,6 +5,8 @@ import './Image.scss';
 import { DragSource, DropTarget } from 'react-dnd'
 import ItemTypes from '../ItemTypes'
 import { findDOMNode } from 'react-dom'
+//var flow = require('lodash/function/flow');
+//import {flow} from 'lodash/function/flow'
 
 const imageSource = {
 	beginDrag(props) {
@@ -63,8 +65,13 @@ const imageTarget = {
 }
 
 
+function collectDrop(connect) {
+  return {
+    connectDropTarget: connect.dropTarget()
+  }
+}
 
-function collect(connect, monitor) {
+function collectDrag(connect, monitor) {
   return {
     connectDragSource: connect.dragSource(),
     isDragging: monitor.isDragging()
@@ -139,9 +146,29 @@ class Image extends React.Component {
   
 }
 
-export default Image;
-// export const MyComponentDragSource = DragSource(/* ... */)(MyComponent);
+const dropTargetHOC = DropTarget(ItemTypes.IMAGE, imageTarget, collectDrop)
+const dragSourceHOC = DragSource(ItemTypes.IMAGE, imageSource, collectDrag)
+
+export default dropTargetHOC(dragSourceHOC(Image))
+
+
+
+
+//  module.exports = flow(
+//    DragSource('image', imageSource, collect),
+//    DropTarget('image', imageTarget, collectTarget)
+//   )(Image);
+
+//  module.exports = DragSource(ItemTypes.KNIGHT, knightSource, collect)(Knight);
+//  export default DragSource(ItemTypes.IMAGE, imageSource, collect)(Knight);
+
+//export default Image;
+//  export const Image = DragSourceItemTypes.CARD, cardSource, (connect, monitor) => ({
+// 	connectDragSource: connect.dragSource(),
+// 	isDragging: monitor.isDragging(),
+// }))(Image);
 // // ^^^ export the intermediate component
 
 // export default const MyComponentDropTarget = DropTarget(/* ... */)(MyComponentDragSource);
 // https://github.com/react-dnd/react-dnd/blob/master/examples/04%20Sortable/Simple/Card.js#L92
+// https://github.com/react-dnd/react-dnd/issues/157
