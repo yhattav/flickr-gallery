@@ -54,7 +54,7 @@ const imageTarget = {
 		}
 
 		// Time to actually perform the action
-		props.moveCard(dragIndex, hoverIndex)
+		props.moveImage(dragIndex, hoverIndex)
 
 		// Note: we're mutating the monitor item here!
 		// Generally it's better to avoid mutations,
@@ -78,23 +78,15 @@ function collectDrag(connect, monitor) {
   }
 }
 
-// @DropTarget(ItemTypes.CARD, cardTarget, connect => ({
-// 	connectDropTarget: connect.dropTarget(),
-// }))
-
-// @DragSource(ItemTypes.CARD, cardSource, (connect, monitor) => ({
-// 	connectDragSource: connect.dragSource(),
-// 	isDragging: monitor.isDragging(),
-// }))
 
 
 
 class Image extends React.Component {
   static propTypes = {
-    //connectDragSource: PropTypes.func.isRequired,
-		//connectDropTarget: PropTypes.func.isRequired,
+    connectDragSource: PropTypes.func.isRequired,
+		connectDropTarget: PropTypes.func.isRequired,
 		index: PropTypes.number.isRequired,
-		//isDragging: PropTypes.bool.isRequired,
+		isDragging: PropTypes.bool.isRequired,
 		id: PropTypes.any.isRequired,
 		moveImage: PropTypes.func.isRequired,
     dto: PropTypes.object,
@@ -129,41 +121,17 @@ class Image extends React.Component {
 			isDragging,
 			connectDragSource,
 			connectDropTarget,
-		} = this.props
-    // return (
-      
-    //   <div
-    //     className="image-root"
-    //     style={{
-    //       backgroundImage: `url(${this.urlFromDto(this.props.dto)})`,
-    //       width: this.props.size + 'px',
-    //       height: this.props.size + 'px',
-    //       transform: 'rotate('+this.state.rotate + 'deg)'
-          
-          
-    //     }}
-    //     >
-    //     <div
-    //     style={{
-    //       transform: 'rotate(-'+this.state.rotate + 'deg)'
-    //     }}>
-    //       <FontAwesome className="image-icon rotateButton" id="rotateButton" name="sync-alt" title="rotate" onClick={() => this.rotate_Click()}/>
-    //       <FontAwesome className="image-icon deleteButton" id="deleteButton" name="trash-alt" title="delete" onClick={() => this.props.deleteClick(this.props.id)}/>
-    //       <FontAwesome className="image-icon expandButton" id="expandButton" name="expand" title="expand" onClick={() => this.props.largeClick(this.props.id)}/>
-    //     </div>
-    //   </div>
-    // );
+		} = this.props;
+    const opacity = isDragging ? 0 : 1
+    const backgroundImage = `url(${this.urlFromDto(this.props.dto)})`;
+    const width = `${this.props.size}px`;
+    const height = `${this.props.size}px`;
+    const transform = `rotate(${this.state.rotate}deg)`;
+  
     return connectDragSource(
 			connectDropTarget(<div
         className="image-root"
-        style={{
-          backgroundImage: `url(${this.urlFromDto(this.props.dto)})`,
-          width: this.props.size + 'px',
-          height: this.props.size + 'px',
-          transform: 'rotate('+this.state.rotate + 'deg)'
-          
-          
-        }}
+        style={{ opacity, backgroundImage, width, height, transform }}
         >
         <div
         style={{
@@ -186,22 +154,5 @@ export default dropTargetHOC(dragSourceHOC(Image))
 
 
 
-
-//  module.exports = flow(
-//    DragSource('image', imageSource, collect),
-//    DropTarget('image', imageTarget, collectTarget)
-//   )(Image);
-
-//  module.exports = DragSource(ItemTypes.KNIGHT, knightSource, collect)(Knight);
-//  export default DragSource(ItemTypes.IMAGE, imageSource, collect)(Knight);
-
-//export default Image;
-//  export const Image = DragSourceItemTypes.CARD, cardSource, (connect, monitor) => ({
-// 	connectDragSource: connect.dragSource(),
-// 	isDragging: monitor.isDragging(),
-// }))(Image);
-// // ^^^ export the intermediate component
-
-// export default const MyComponentDropTarget = DropTarget(/* ... */)(MyComponentDragSource);
 // https://github.com/react-dnd/react-dnd/blob/master/examples/04%20Sortable/Simple/Card.js#L92
 // https://github.com/react-dnd/react-dnd/issues/157

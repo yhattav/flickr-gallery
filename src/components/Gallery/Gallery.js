@@ -26,6 +26,7 @@ class Gallery extends React.Component {
     this.handleResize = this.handleResize.bind(this);
     this.calcImageSize = this.calcImageSize.bind(this);
     this.arrow_Click = this.arrow_Click.bind(this);
+    this.moveImage = this.moveImage.bind(this);
   }
 
   moveImage(dragIndex, hoverIndex) {
