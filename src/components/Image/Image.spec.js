@@ -3,7 +3,6 @@ import {shallow} from 'enzyme';
 import sinon from 'sinon';
 import {expect} from 'chai';
 import Image from './Image.js';
-//import Gallery from '../Gallery/Gallery.js';
 
 describe('Image', () => {
 

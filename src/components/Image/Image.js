@@ -5,16 +5,14 @@ import './Image.scss';
 import { DragSource, DropTarget } from 'react-dnd'
 import ItemTypes from '../ItemTypes'
 import { findDOMNode } from 'react-dom'
-//var flow = require('lodash/function/flow');
-//import {flow} from 'lodash/function/flow'
 
 const imageSource = {
 	beginDrag(props) {
 		return {
 			id: props.id,
-			index: props.index,
+			index: props.index
 		}
-	},
+	}
 }
 
 const imageTarget = {
@@ -56,28 +54,7 @@ const imageTarget = {
     if (downwards && (leftwards || rightwards)){
       return;
     }
-		// // Get vertical middle
-		// const hoverMiddleY = (hoverBoundingRect.bottom - hoverBoundingRect.top) / 2
 
-		// // Determine mouse position
-		// const clientOffset = monitor.getClientOffset()
-
-		// // Get pixels to the top
-		// const hoverClientY = clientOffset.y - hoverBoundingRect.top
-
-		// // Only perform the move when the mouse has crossed half of the items height
-		// // When dragging downwards, only move when the cursor is below 50%
-		// // When dragging upwards, only move when the cursor is above 50%
-
-		// // Dragging downwards
-		// if (dragIndex < hoverIndex && hoverClientY < hoverMiddleY) {
-		// 	return
-		// }
-
-		// // Dragging upwards
-		// if (dragIndex > hoverIndex && hoverClientY > hoverMiddleY) {
-		// 	return
-		// }
 
 		// Time to actually perform the action
 		props.moveImage(dragIndex, hoverIndex)
@@ -87,7 +64,7 @@ const imageTarget = {
 		// but it's good here for the sake of performance
 		// to avoid expensive index searches.
 		monitor.getItem().index = hoverIndex
-	},
+	}
 }
 
 
@@ -143,10 +120,9 @@ class Image extends React.Component {
 
   render() {
     const {
-			text,
 			isDragging,
 			connectDragSource,
-			connectDropTarget,
+			connectDropTarget
 		} = this.props;
     const opacity = isDragging ? 0 : 1
     const backgroundImage = `url(${this.urlFromDto(this.props.dto)})`;
