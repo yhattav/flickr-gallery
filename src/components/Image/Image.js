@@ -29,29 +29,55 @@ const imageTarget = {
 
 		// Determine rectangle on screen
 		const hoverBoundingRect = findDOMNode(component).getBoundingClientRect()
+    // Get vertical middle
+    const hoverMiddleY = (hoverBoundingRect.bottom - hoverBoundingRect.top) / 2;
 
-		// Get vertical middle
-		const hoverMiddleY = (hoverBoundingRect.bottom - hoverBoundingRect.top) / 2
+    // Get horizontal middle
+    const hoverMiddleX = (hoverBoundingRect.right - hoverBoundingRect.left) / 2;
 
-		// Determine mouse position
-		const clientOffset = monitor.getClientOffset()
+    // Determine mouse position
+    const clientOffset = monitor.getClientOffset();
 
-		// Get pixels to the top
-		const hoverClientY = clientOffset.y - hoverBoundingRect.top
+    // Get pixels to the top
+    const hoverClientY = clientOffset.y - hoverBoundingRect.top;
 
-		// Only perform the move when the mouse has crossed half of the items height
-		// When dragging downwards, only move when the cursor is below 50%
-		// When dragging upwards, only move when the cursor is above 50%
+    // Get pixels to the left
+    const hoverClientX = clientOffset.x - hoverBoundingRect.left;
 
-		// Dragging downwards
-		if (dragIndex < hoverIndex && hoverClientY < hoverMiddleY) {
-			return
-		}
+    const upwards = dragIndex > hoverIndex && hoverClientY > hoverMiddleY;
+    const downwards = dragIndex < hoverIndex && hoverClientY < hoverMiddleY;
+    const leftwards = dragIndex > hoverIndex && hoverClientX > hoverMiddleX;
+    const rightwards = dragIndex < hoverIndex && hoverClientX < hoverMiddleX;
 
-		// Dragging upwards
-		if (dragIndex > hoverIndex && hoverClientY > hoverMiddleY) {
-			return
-		}
+    if (upwards && (leftwards || rightwards)){
+      return;
+    }
+
+    if (downwards && (leftwards || rightwards)){
+      return;
+    }
+		// // Get vertical middle
+		// const hoverMiddleY = (hoverBoundingRect.bottom - hoverBoundingRect.top) / 2
+
+		// // Determine mouse position
+		// const clientOffset = monitor.getClientOffset()
+
+		// // Get pixels to the top
+		// const hoverClientY = clientOffset.y - hoverBoundingRect.top
+
+		// // Only perform the move when the mouse has crossed half of the items height
+		// // When dragging downwards, only move when the cursor is below 50%
+		// // When dragging upwards, only move when the cursor is above 50%
+
+		// // Dragging downwards
+		// if (dragIndex < hoverIndex && hoverClientY < hoverMiddleY) {
+		// 	return
+		// }
+
+		// // Dragging upwards
+		// if (dragIndex > hoverIndex && hoverClientY > hoverMiddleY) {
+		// 	return
+		// }
 
 		// Time to actually perform the action
 		props.moveImage(dragIndex, hoverIndex)
