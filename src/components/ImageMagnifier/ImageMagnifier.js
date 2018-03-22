@@ -1,6 +1,7 @@
 
 import ReactDOM from 'react-dom';
 import React from 'react';
+import PropTypes from 'prop-types';
 import './ImageMagnifier.scss';
 
 class Magnifier extends React.Component {
@@ -57,7 +58,6 @@ class Magnifier extends React.Component {
                          magX > 1;
         var lensX =(1-(props.offsetX / (props.smallImage.width*0.5)))*(  props.cursorOffset.x);
         var lensY =(1-(props.offsetY / (props.smallImage.height*0.5)))*( props.cursorOffset.y);
-        console.log('h: +' + props.zoomImage.height+' w: '+props.zoomImage.width)
         return (
             <div style={{
                 position: 'absolute',
@@ -87,7 +87,7 @@ class Magnifier extends React.Component {
             </div>
         );
     }
-};
+}
 
 function getOffset(el) {
     var x = 0;
@@ -99,10 +99,13 @@ function getOffset(el) {
     }
     return { x, y };
 }
-//class ImageMagnifier extends React.Component {
-var ImageMagnifier = React.createClass({
 
-    propTypes: {
+
+
+
+class ImageMagnifier extends React.Component {
+
+    static propTypes = {
 
         // the size of the magnifier window
         size: React.PropTypes.number,
@@ -126,26 +129,20 @@ var ImageMagnifier = React.createClass({
             width: React.PropTypes.number.isRequired,
             height: React.PropTypes.number.isRequired
         }).isRequired
-    },
+    };
 
-    portalElement: null,
-
-    getDefaultProps () {
-        return {
-            size: 200,
-            cursorOffset: { x: 0, y: 0 }
-        };
-    },
-
-    getInitialState () {
-        return {
+    constructor(props) {
+        super(props);
+        this.state = {
             x: 0,
             y: 0,
             offsetX: -1,
-            offsetY: -1
+            offsetY: -1,
+            portalElement: null
         };
-    },
-
+        this.onMouseMove = this.onMouseMove.bind(this);
+      }
+      
     componentDidMount() {
         document.addEventListener('mousemove', this.onMouseMove);
         if (!this.portalElement) {
@@ -153,13 +150,13 @@ var ImageMagnifier = React.createClass({
             document.body.appendChild(this.portalElement);
         }
         this.componentDidUpdate();
-    },
+    }
 
     componentWillUnmount() {
         document.removeEventListener('mousemove', this.onMouseMove);
         document.body.removeChild(this.portalElement);
         this.portalElement = null;
-    },
+    }
 
     onMouseMove (e) {
         var offset = getOffset(ReactDOM.findDOMNode(this));
@@ -169,7 +166,7 @@ var ImageMagnifier = React.createClass({
             offsetX: e.x - offset.x,
             offsetY: e.y - offset.y
         });
-    },
+    }
 
     componentDidUpdate() {
         ReactDOM.render(<Magnifier
@@ -179,7 +176,7 @@ var ImageMagnifier = React.createClass({
             cursorOffset={this.props.cursorOffset}
             {...this.state}
         />, this.portalElement);
-    },
+    }
 
     render () {
         return (
@@ -193,6 +190,12 @@ var ImageMagnifier = React.createClass({
              src={this.props.image.src} />
         );
     }
-});
+}
 
-module.exports = ImageMagnifier;
+ImageMagnifier.defaultProps = {
+    size: 200,
+    cursorOffset: { x: 0, y: 0 }
+  };
+
+  export default ImageMagnifier
+//module.exports = ImageMagnifier;
