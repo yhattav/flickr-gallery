@@ -1,4 +1,4 @@
-// import ImageMagnifier from './ImageMagnifier';
+ import ImageMagnifier from './ImageMagnifier';
 
-// export default ImageMagnifier;
-module.exports = require('./ImageMagnifier');
+ export default ImageMagnifier;
+//module.exports = require('./ImageMagnifier');

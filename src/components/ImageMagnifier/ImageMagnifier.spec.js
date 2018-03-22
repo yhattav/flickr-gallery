@@ -1,49 +1,67 @@
-// // import 'jsdom-global/register';
-// import React from 'react';
-// import {mount, shallow} from 'enzyme';
-// //import moxios from 'moxios';
-// //import sinon from 'sinon';
-// import {expect} from 'chai';
-// import Slideshow from './Slideshow.js';
+//  import 'jsdom-global/register';
+import React from 'react';
+import {mount, shallow} from 'enzyme';
+//  import moxios from 'moxios';
+//  import sinon from 'sinon';
+import {expect} from 'chai';
+import ImageMagnifier from './ImageMagnifier.js';
 
-// describe('Slideshow', () => {
+ describe('ImageMagnifier', () => {
 
 //   const sampleSizes = [
 //     {label: 'Square', width:75, height: 75, source: 'http://farm2.staticflickr.com/1103/567229075_2cf8456f01_s.jpg', url: 'http://www.flickr.com/photos/stewart/567229075/sizes/sq/', media: 'photo'},
 //     {label:'Medium', width:500, height:375, source: 'http://farm2.staticflickr.com/1103/567229075_2cf8456f01.jpg', url: 'http://www.flickr.com/photos/stewart/567229075/sizes/m/', media:'photo'},
 //     {label:'Large', width:1024, height:768, source: 'http://farm2.staticflickr.com/1103/567229075_2cf8456f01_b.jpg', url: 'http://www.flickr.com/photos/stewart/567229075/sizes/l/', media:'photo'}
 //   ];
+  //const url='http://farm2.staticflickr.com/1103/567229075_2cf8456f01_s.jpg'
 
 //   const sampleImage = {id: '567229075', owner: '59717246@N05', secret: '2cf8456f01', server: '1103', farm: 2};
 
-//    let wrapperSlide;
-//    const galleryWidth = 1000;
-//    const galleryHeight = 1080;
-
-//    const mountSlideshow = () => {
-//      return shallow(
-//        <Slideshow dto={sampleImage} large={true} galleryWidth={galleryWidth} galleryHeight={galleryHeight} index={3}/>,
-//        {lifecycleExperimental: true, attachTo: document.createElement('div')}
-//      );
-//    };
+let wrapper;
+    const mountImageMagnifier = () => {
+      return shallow(
+        <ImageMagnifier image={{
+                    src: 'http://farm2.staticflickr.com/1103/567229075_2cf8456f01_s.jpg',
+                    width: 100,
+                    height: 100
+                }}
+                zoomImage={{
+                    src: 'http://farm2.staticflickr.com/1103/567229075_2cf8456f01_s.jpg',
+                    width: 200,
+                    height: 200
+                }}
+                cursorOffset={{ x: 120, y: 120 }}/>,
+        {lifecycleExperimental: true, attachTo: document.createElement('div')}
+      );
+    };
 //    const mountFirstSlideshow = () => {
 //      return shallow(
 //        <Slideshow dto={sampleImage} large={true} galleryWidth={galleryWidth} galleryHeight={galleryHeight} index={0}/>,
 //        {lifecycleExperimental: true, attachTo: document.createElement('div')}
 //      );
 //    };
-//   //  beforeEach(() => {
-//   //    wrapper = mountSlideshow();
-//   //  });
-//    beforeEach(() => {
-//     wrapperSlide = mount(
-//       <Slideshow dto={sampleImage} large={true} galleryWidth={galleryWidth} galleryHeight={galleryHeight} index={3}/>,
-//       {attachTo: document.createElement('div')}
-//     );
-//   });
-//     it('renders', () => {
-//     expect(wrapperSlide).to.not.be.undefined;
-//   });
+      // beforeEach(() => {
+      //   wrapper = mountImageMagnifier();
+      // });
+   beforeEach(() => {
+    wrapper = mount(
+      <ImageMagnifier image={{
+                    src: 'http://farm2.staticflickr.com/1103/567229075_2cf8456f01_s.jpg',
+                    width: 100,
+                    height: 100
+                }}
+                zoomImage={{
+                    src: 'http://farm2.staticflickr.com/1103/567229075_2cf8456f01_s.jpg',
+                    width: 200,
+                    height: 200
+                }}
+                cursorOffset={{ x: 120, y: 120 }}/>,
+      {attachTo: document.createElement('div')}
+    );
+  });
+      it('renders', () => {
+      expect(wrapper).to.not.be.undefined;
+    });
 
 //   it('finds the large size url for a picture', () => {
 //     wrapperSlide = mountSlideshow();
@@ -108,4 +126,4 @@
 //   //   expect(remainder).to.be.lessThan(1);
 //   // });
 
-// });
+ });

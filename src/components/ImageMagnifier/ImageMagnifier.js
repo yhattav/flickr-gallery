@@ -7,36 +7,20 @@ import './ImageMagnifier.scss';
 class Magnifier extends React.Component {
 
     static propTypes = {
-
-        // the size of the magnifier window
         size: PropTypes.number.isRequired,
-
-        // x position on screen
         x: PropTypes.number.isRequired,
-
-        // y position on screen
         y: PropTypes.number.isRequired,
-
-        // x position relative to the image
         offsetX: PropTypes.number.isRequired,
-
-        // y position relative to the image
         offsetY: PropTypes.number.isRequired,
-
-        // the offset of the zoom bubble from the cursor
         cursorOffset: PropTypes.shape({
             x: PropTypes.number.isRequired,
             y: PropTypes.number.isRequired
         }).isRequired,
-
-        // the size of the non-zoomed-in image
         smallImage: PropTypes.shape({
             src: PropTypes.string.isRequired,
             width: PropTypes.number.isRequired,
             height: PropTypes.number.isRequired
         }).isRequired,
-
-        // the size of the zoomed-in image
         zoomImage: PropTypes.shape({
             src: PropTypes.string.isRequired,
             width: PropTypes.number.isRequired,
@@ -106,24 +90,16 @@ function getOffset(el) {
 class ImageMagnifier extends React.Component {
 
     static propTypes = {
-
-        // the size of the magnifier window
         size: PropTypes.number,
-
-        // the offset of the zoom bubble from the cursor
         cursorOffset: PropTypes.shape({
             x: PropTypes.number.isRequired,
             y: PropTypes.number.isRequired
         }),
-
-        // the size of the non-zoomed-in image
         image: PropTypes.shape({
             src: PropTypes.string.isRequired,
             width: PropTypes.number.isRequired,
             height: PropTypes.number.isRequired
         }).isRequired,
-
-        // the size of the zoomed-in image
         zoomImage: PropTypes.shape({
             src: PropTypes.string.isRequired,
             width: PropTypes.number.isRequired,
@@ -183,9 +159,7 @@ class ImageMagnifier extends React.Component {
             <img
              style={{
                     width: this.props.image.width + 'px',
-                    height: this.props.image.height + 'px',
-
-                    
+                    height: this.props.image.height + 'px'
                   }}
              src={this.props.image.src} />
         );
@@ -198,4 +172,5 @@ ImageMagnifier.defaultProps = {
   };
 
   export default ImageMagnifier
-//module.exports = ImageMagnifier;
+
+  // used react-image-magnifier as a base to this
