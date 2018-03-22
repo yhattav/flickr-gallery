@@ -85,7 +85,7 @@ function collectDrag(connect, monitor) {
 
 
 class Image extends React.Component {
-  
+
   static propTypes = {
     connectDragSource: PropTypes.func.isRequired,
 		connectDropTarget: PropTypes.func.isRequired,
@@ -156,6 +156,6 @@ const dragSourceHOC = DragSource(ItemTypes.IMAGE, imageSource, collectDrag)
 export default dropTargetHOC(dragSourceHOC(Image))
 
 
-
+// used react-dnd
 // https://github.com/react-dnd/react-dnd/blob/master/examples/04%20Sortable/Simple/Card.js#L92
 // https://github.com/react-dnd/react-dnd/issues/157
