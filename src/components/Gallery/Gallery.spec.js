@@ -32,10 +32,9 @@ describe('Gallery', () => {
     {id: '39301758930', owner: '28549294@N05', secret: 'e6ccd03a1b', server: '4719', farm: 5}
   ];
 
-  //const galleryWidth = wrapper.getGalleryWidth();
 
   let wrapper;
-  const OriginalGallery = Gallery.DecoratedComponent;
+  //const OriginalGallery = Gallery.DecoratedComponent;
   const mountGallery = () => {
     
     return shallow(
@@ -44,15 +43,6 @@ describe('Gallery', () => {
     );
   };
 
-  //  beforeEach(() => {
-  //   wrapper = mount(
-  //     <OriginalGallery/>,
-  //     {attachTo: document.createElement('div')}
-  //    );
-  //  });
-  // afterEach(() => {
-  //     spy.restore();
-  // });
 
   it('renders', () => {
     wrapper=mountGallery();
@@ -60,13 +50,12 @@ describe('Gallery', () => {
   });
 
   it('renders all images on the state', done => {
-    wrapper=mountGallery();
     wrapper.setState({
       images: initialImages
     }, () => {
-      expect(wrapper.children().children('Image').length).to.eq(initialImages.length);
       done();
     });
+    expect(wrapper.children().children('Image').length).to.eq(initialImages.length);
   });
 
   it('renders a Backtop correctly', () => {
