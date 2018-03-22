@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import axios from 'axios';
 import FontAwesome from 'react-fontawesome';
 import './Slideshow.scss';
+import ImageMagnifier from '../ImageMagnifier';
 
 class Slideshow extends React.Component {
   static propTypes = {
@@ -27,6 +28,8 @@ class Slideshow extends React.Component {
       isLarge: false,
       slideWidth: 0,
       slideHeight: 0,
+      imageWidth: 0,
+      imageHeight: 0,
       imageSource: ''
     };
     this.calcSlideSize = this.calcSlideSize.bind(this);
@@ -34,9 +37,26 @@ class Slideshow extends React.Component {
 
 
   urlFromSizes() {
-    var largeIndex = this.state.sizes.map(function(e) { return e.label; }).indexOf('Large');
-    if (largeIndex == -1) return this.state.sizes[this.state.sizes.length-1].source;
-    else return this.state.sizes[largeIndex].source;
+
+    if (this.state.sizes[this.state.sizes.length-1].label==='Original') return this.state.sizes[this.state.sizes.length-2].source;
+    else return this.state.sizes[this.state.sizes.length-1].source;
+
+  }
+
+  WidthFromSizes() {
+
+    if (this.state.sizes[this.state.sizes.length-1].label==='Original') return this.state.sizes[this.state.sizes.length-2].width;
+    else
+    return this.state.sizes[this.state.sizes.length-1].width;
+
+  }
+
+  HeightFromSizes() {
+
+    if (this.state.sizes[this.state.sizes.length-1].label==='Original') return this.state.sizes[this.state.sizes.length-2].height;
+    else
+    return this.state.sizes[this.state.sizes.length-1].height;
+
   }
 
   calcSlideSize(sizes){
@@ -58,7 +78,9 @@ class Slideshow extends React.Component {
       }
       this.setState({
         slideWidth,
-        slideHeight
+        slideHeight,
+        imageWidth,
+        imageHeight
       });
 }
 
@@ -97,43 +119,56 @@ getSizes(dto) {
     this.calcSlideSize(this.state.sizes);
    
   }
-  render() {
-    if (this.props.large){
-      return (
-        <div className="slideshow-root">
-          <div className="slideshow-background">
-                <div className="slide"
-                  style={{
-                    backgroundImage: `url(${this.urlFromSizes()})`,
-                    width: this.state.slideWidth + 'px',
-                    height: this.state.slideHeight + 'px',
-                    top: ((this.props.galleryHeight-this.state.slideHeight)/2)+ 'px',
-                    left: ((this.props.galleryWidth-this.state.slideWidth)/2)+ 'px'
-                  }}
-                  >
-                </div>
-          </div>
-          <div className="icons-background">
-                <div className="slide-icons">
-                  <FontAwesome className="image-icon" name="times" title="Close" onClick={() => this.props.largeClick(this.props.id)}/>
-                </div>
-                <div className="left-icons">
-                  {this.props.index > 0 &&
-                  <FontAwesome className="image-icon" name="chevron-left" title = {'Previous image: ' + (this.props.index-1) + '/' + this.props.galleryLength } onClick={() => this.props.arrowClick(this.props.id,-1)}/>}
-                </div>
-                <div className="right-icons">
-                  <FontAwesome className="image-icon" name="chevron-right" title={'Next Image: ' + (this.props.index+1) + '/' + this.props.galleryLength } onClick={() => this.props.arrowClick(this.props.id,1)}/>
-                </div>
-          </div>
-        </div>
-      );
-    }
-     else{
-     return (
-       <span/>
-     );
-   }
-  }
-}
 
+render() {
+  if (this.props.large){
+    return (
+      <div className="slideshow-root">
+        <div className="slideshow-background">
+              <div className="slide"
+                style={{
+                  backgroundImage: `url(${this.urlFromSizes()})`,
+                  width: this.state.slideWidth + 'px',
+                  height: this.state.slideHeight + 'px',
+                  top: ((this.props.galleryHeight-this.state.slideHeight)/2)+ 'px',
+                  left: ((this.props.galleryWidth-this.state.slideWidth)/2)+ 'px'
+                }}
+                >
+                <ImageMagnifier
+                image={{
+                    src: `${this.urlFromSizes()}`,
+                    width: Number.parseInt(this.state.slideWidth, 10),
+                    height: Number.parseInt(this.state.slideHeight, 10)
+                }}
+                zoomImage={{
+                    src: `${this.urlFromSizes()}`,
+                    width: Number.parseInt(this.WidthFromSizes(), 10),
+                    height: Number.parseInt(this.HeightFromSizes(), 10)
+                }}
+                cursorOffset={{ x: 120, y: 120 }}
+            />
+              </div>
+        </div>
+        <div className="icons-background">
+              <div className="slide-icons">
+                <FontAwesome className="image-icon" name="times" title="Close" onClick={() => this.props.largeClick(this.props.id)}/>
+              </div>
+              <div className="left-icons">
+                {this.props.index > 0 &&
+                <FontAwesome className="image-icon" name="chevron-left" title = {'Previous image: ' + (this.props.index-1) + '/' + this.props.galleryLength } onClick={() => this.props.arrowClick(this.props.id,-1)}/>}
+              </div>
+              <div className="right-icons">
+                <FontAwesome className="image-icon" name="chevron-right" title={'Next Image: ' + (this.props.index+1) + '/' + this.props.galleryLength } onClick={() => this.props.arrowClick(this.props.id,1)}/>
+              </div>
+        </div>
+      </div>
+    );
+  }
+   else{
+   return (
+     <span/>
+   );
+ }
+}
+}
 export default Slideshow;

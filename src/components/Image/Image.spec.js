@@ -44,7 +44,7 @@ import Image from './Image.js';
          connectDragSource={identity} />,
       {lifecycleExperimental: true, attachTo: document.createElement('div')}
     );
-  };
+   };
 
    beforeEach(() => {
      wrapper = mountImage();
@@ -62,7 +62,7 @@ import Image from './Image.js';
     wrapper.unmount();
     wrapper = mountDraggedImage();
     expect(wrapper.find('.image-root').prop('style')).to.deep.include({ opacity: 0})
-   });   
+   });
 
   it('rotates in 90 deg', () => {
      const rotate = 90;
@@ -71,17 +71,17 @@ import Image from './Image.js';
    });
 
 
-   it("simulates click event for enlarge", function() {
+   it('simulates click event for enlarge', function() {
      wrapper.unmount();
      wrapper = mountImage();
-     wrapper.find(".expandButton").simulate('click');
+     wrapper.find('.expandButton').simulate('click');
      expect(largeClick.called).to.be.true;
    });
 
-   it("simulates click event for delete", function() {
+   it('simulates click event for delete', function() {
     wrapper.unmount();
     wrapper = mountImage();
-    wrapper.find(".deleteButton").simulate('click');
+    wrapper.find('.deleteButton').simulate('click');
     expect(deleteClick.called).to.be.true;
   });
 

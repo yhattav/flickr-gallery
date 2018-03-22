@@ -1,10 +1,9 @@
 import React from 'react';
-import {mount, shallow} from 'enzyme';
+import {shallow} from 'enzyme';
 import {expect} from 'chai';
 import sinon from 'sinon';
 import moxios from 'moxios';
 import Gallery from './Gallery.js';
-import TestUtils from 'react-dom/test-utils';
 
 
 describe('Gallery', () => {
@@ -34,7 +33,6 @@ describe('Gallery', () => {
 
 
   let wrapper;
-  //const OriginalGallery = Gallery.DecoratedComponent;
   const mountGallery = () => {
     
     return shallow(
@@ -106,9 +104,6 @@ describe('Gallery', () => {
       });
     });
     wrapper.setProps({tag: 'test2'});
-      //wrapper.instance().handleScroll();
-      //wrapper.instance().handleScroll();
-
   });
 
     it('gets more images on scroll to bottom on top of existing images', done => {
