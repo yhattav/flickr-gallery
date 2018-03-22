@@ -4,6 +4,8 @@ import {expect} from 'chai';
 import sinon from 'sinon';
 import moxios from 'moxios';
 import Gallery from './Gallery.js';
+import TestUtils from 'react-dom/test-utils';
+
 
 describe('Gallery', () => {
 
@@ -33,29 +35,32 @@ describe('Gallery', () => {
   //const galleryWidth = wrapper.getGalleryWidth();
 
   let wrapper;
-
+  const OriginalGallery = Gallery.DecoratedComponent;
   const mountGallery = () => {
+    
     return shallow(
       <Gallery tag='test2' />,
       {lifecycleExperimental: true, attachTo: document.createElement('div')}
     );
   };
 
-  beforeEach(() => {
-    wrapper = mount(
-      <Gallery/>,
-      {attachTo: document.createElement('div')}
-    );
-  });
+  //  beforeEach(() => {
+  //   wrapper = mount(
+  //     <OriginalGallery/>,
+  //     {attachTo: document.createElement('div')}
+  //    );
+  //  });
   // afterEach(() => {
   //     spy.restore();
   // });
 
   it('renders', () => {
+    wrapper=mountGallery();
     expect(wrapper).to.not.be.undefined;
   });
 
   it('renders all images on the state', done => {
+    wrapper=mountGallery();
     wrapper.setState({
       images: initialImages
     }, () => {
@@ -85,6 +90,7 @@ describe('Gallery', () => {
     expect(spy.called).to.be.true;
     spy.restore();
   });
+
   it('calculate image size correctly', () => {
     wrapper = mountGallery();
     const galleryWidth = wrapper.instance().getGalleryWidth();

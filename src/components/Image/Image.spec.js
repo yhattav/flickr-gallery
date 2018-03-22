@@ -18,6 +18,8 @@ import TestUtils from 'react-dom/test-utils';
           id='0'
           index= {0}
           galleryWidth={galleryWidth}
+          isDragging = {false}
+          moveImage={(() => {})}
           deleteClick={(() => {})}
           largeClick={(() => {})}
           connectDropTarget={identity}
