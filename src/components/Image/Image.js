@@ -85,6 +85,7 @@ function collectDrag(connect, monitor) {
 
 
 class Image extends React.Component {
+  
   static propTypes = {
     connectDragSource: PropTypes.func.isRequired,
 		connectDropTarget: PropTypes.func.isRequired,
